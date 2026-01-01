@@ -163,9 +163,11 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://user-managementt.vercel.app/",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'https://*.up.railway.app',  # Added for Railway domains
+    "https://user-managementt.vercel.app/"
 ]
