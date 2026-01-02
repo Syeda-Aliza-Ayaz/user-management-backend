@@ -51,6 +51,8 @@ class UserSerializer(serializers.ModelSerializer):
         return list(user.userpermission_set.values_list("permission__code", flat=True))
 
 
+# accounts/serializers.py
+
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
@@ -69,10 +71,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        # Pop the optional fields with defaults so create_user doesn't get unexpected kwargs
+        # Safely extract optional fields
         department = validated_data.pop('department', '')
         purse_number = validated_data.pop('purse_number', '')
 
+        # Create user with required fields
         user = User.objects.create_user(
             email=validated_data['email'],
             password=validated_data['password'],
